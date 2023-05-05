@@ -23,5 +23,9 @@ extension MainViewController{
     func setup(){
         configureView()
         registerTableView()
+        getData()
+    }
+    func getData(){
+        viewModel.getData()
     }
 }
