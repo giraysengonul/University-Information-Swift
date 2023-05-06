@@ -16,7 +16,7 @@ class Service {
         
         AF.request(ServiceConstant.shared.url).response { response in
             
-            if let error = response.error{
+            if response.error != nil{
                 completion(.failure(.urlError))
                 return
             }

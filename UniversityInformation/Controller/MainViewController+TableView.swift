@@ -10,7 +10,7 @@ private let reuseIdentifier = "cell"
 extension MainViewController{
     
     func registerTableView(){
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+        tableView.register(MainViewCell.self, forCellReuseIdentifier: reuseIdentifier)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -22,10 +22,11 @@ extension MainViewController{
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
-        cell.textLabel?.text = "\(indexPath.row)"
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! MainViewCell
         return cell
     }
-    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70
+    }
     
 }
