@@ -7,17 +7,26 @@
 
 import Foundation
 import Alamofire
+enum ServiceError: Error {
+case urlError
+case decodingError
+}
 class Service {
-    static func getData(){
+    static func getData(completion: @escaping(Result<[University],ServiceError>) -> Void){
         
         AF.request(ServiceConstant.shared.url).response { response in
             
             if let error = response.error{
-                print(error.localizedDescription)
+                completion(.failure(.urlError))
                 return
             }
             guard let data = response.data else{ return }
-            print(String(data: data, encoding: .utf8))
+            do{
+                let dataResult = try JSONDecoder().decode([University].self, from: data)
+                completion(.success(dataResult))
+            }catch{
+                completion(.failure(.decodingError))
+            }
             
             
         }

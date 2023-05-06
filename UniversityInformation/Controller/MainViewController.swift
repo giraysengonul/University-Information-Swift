@@ -9,6 +9,9 @@ import UIKit
 class MainViewController: UITableViewController {
      // MARK: - Properties
     var viewModel = MainViewModel()
+    var dataResult: [University] = []{
+        didSet{ tableView.reloadData() }
+    }
      // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +29,8 @@ extension MainViewController{
         getData()
     }
     func getData(){
-        viewModel.getData()
+        viewModel.getData { result in
+            self.dataResult = result
+        }
     }
 }
