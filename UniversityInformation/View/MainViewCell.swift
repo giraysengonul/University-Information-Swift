@@ -9,6 +9,9 @@ import UIKit
 
 class MainViewCell: UITableViewCell {
      // MARK: - Properties
+    var viewModel: MainViewCellViewModel?{
+        didSet{ configure() }
+    }
     private let universityImageView: UIImageView = {
         let image = #imageLiteral(resourceName: "university")
        let imageView = UIImageView()
@@ -56,5 +59,9 @@ extension MainViewCell{
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5)
         ])
         
+    }
+    private func configure(){
+        guard let viewModel = self.viewModel else { return }
+        self.universityNameLabel.text = viewModel.name
     }
 }
